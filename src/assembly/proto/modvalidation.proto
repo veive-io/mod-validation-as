@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package modvalidation;
+
+import "koinos/options.proto";
+
+message on_install_args {
+  bytes data = 1;
+}
+
+message on_uninstall_args {
+  bytes data = 1;
+}
+
+message is_type_args {
+  uint32 type_id = 1;
+}
+
+message is_type_result {
+  bool value = 1;
+}
+
+message scope {
+  string operation_type = 1;
+  uint32 entry_point = 2;
+  bytes contract_id = 3 [(koinos.btype) = ADDRESS];
+}
+
+message manifest {
+  string name = 1;
+  uint32 type_id = 2;
+  string version = 3;
+  string description = 4;
+  repeated scope scopes = 5;
+}
+
+message call_data {
+  bytes contract_id = 1;
+  uint32 entry_point = 2;
+  bytes caller = 3;
+  bytes data = 4;
+}
+
+enum authorization_type {
+  contract_call = 0;
+  transaction_application = 1;
+  contract_upload = 2;
+}
+
+message authorize_arguments {
+  authorization_type type = 1;
+  call_data call = 2;
+}
+
+message authorize_result {
+  bool value = 1;
+}

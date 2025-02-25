@@ -1,0 +1,1 @@
+export const MODULE_VALIDATION_TYPE_ID = 1;
